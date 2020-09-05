@@ -1,0 +1,30 @@
+name: genql-cli Npm Package
+
+on:
+  push:
+    # branches:
+    #   - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Bump version
+        if: github.ref == 'refs/heads/master'
+        uses: remorses/bump-version@js
+        with:
+          version_file: genql-cli/VERSION
+          prefix: genql-cli
+          ignore: generated, dist, esm
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm publish || echo 'cannot publish'
+        if: github.ref == 'refs/heads/master'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
