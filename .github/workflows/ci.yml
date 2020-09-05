@@ -18,9 +18,8 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: remorses/bump-version@js
         with:
-          version_file: genql-cli/VERSION
-          prefix: genql-cli
-          ignore: generated, dist, esm
+          version_file: VERSION
+          ignore: dist, esm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm publish
