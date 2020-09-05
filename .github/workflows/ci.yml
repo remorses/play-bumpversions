@@ -16,7 +16,7 @@ jobs:
           node-version: '13'
       - run: npm i -g npm@latest
       - name: Bump version
-        if: "contains(['refs/heads/master', 'refs/heads/beta'], github.ref)"
+        if: "'refs/heads/master' == github.ref || 'refs/heads/beta' == github.ref"
         uses: remorses/bump-version@js
         with:
           version_file: VERSION
@@ -25,7 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm publish
-        if: "contains(['refs/heads/master', 'refs/heads/beta'], github.ref)"
+        if: "'refs/heads/master' == github.ref || 'refs/heads/beta' == github.ref"
         env:
           NPM_TOKEN: ${{ secrets.npm_token }}
 
