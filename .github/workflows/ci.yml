@@ -24,7 +24,7 @@ jobs:
           ignore: dist, esm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm publish --access public --tag beta
+      - run: npm publish --tag beta
         if: "'refs/heads/master' == github.ref || 'refs/heads/beta' == github.ref"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
