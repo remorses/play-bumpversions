@@ -21,10 +21,9 @@ jobs:
         with:
           version_file: VERSION
           ignore: dist, esm
-          prerelease_tag: beta
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm publish --access public
+      - run: npm publish --access public --tag beta
         if: "'refs/heads/master' == github.ref || 'refs/heads/beta' == github.ref"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
